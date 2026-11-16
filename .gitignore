@@ -3,6 +3,12 @@ __pycache__/
 .env
 .env.*
 *.log
+build/
+dist/
+*.egg-info/
+.venv/
+# The Part 2 run state of eval/v5 holds whole conversations; the scored results are kept.
+eval/v5/results/agents/
 # Raw promptfoo results hold local paths; the scored summaries and outputs are kept.
 eval/results/*.json
 eval/v2/results/*.json

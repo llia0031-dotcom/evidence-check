@@ -75,9 +75,42 @@ After 0.3.0, use on real files still showed correct claims flagged, most often f
 
 Rounding changes what the section above leaves flagged: a claim's number now also matches a more precise number in its quotes that rounds to it, if the claim keeps at least two significant digits, and the report lists each rounded match. `0.3` for `0.314`, `120` for `123` and `约 4 万` for `43,000` are still flagged; sums, ratios and conversions still are too. An ordinal counts as a name only when it is in the quote's paragraph or the heading above it, so a rule quoted from under `第 6 条` and cited as `第 7 条` is still flagged. The v3 results are unchanged, and no v1 sentence or v2 draft item changed result ([`v3/results/regression.md`](v3/results/regression.md)).
 
+## v5: evcheck on whole drafts, and an assistant that can call it
+
+evcheck checks a finished draft with no claims file: it picks the sentences with a number or a quotation, finds the closest lines of the sources by their words, and runs the script on them. v5 has four fictional sets, two Chinese and two English, with drafts and sources in Markdown, CSV, Word and Excel. The labels, expectations, cost limit and file hashes were fixed in [`v5/PREREGISTRATION.md`](v5/PREREGISTRATION.md) before either part ran.
+
+**Part 1, no model** ([`v5/results/cli.md`](v5/results/cli.md)):
+
+| 48 labelled sentences | Expected | Result |
+|---|---|---|
+| Planted errors (changed numbers, edited or invented quotes) | flagged | **16/16** flagged |
+| Correct sentences | pass | **25/25** passed (0 false alarms) |
+| Wrong in meaning, with numbers and quotes that are in the sources | pass, since evcheck does not judge meaning | 2 passed; the other 2 have no number and were not checked |
+| A number worked out from the sources (a sum, a duration) | flagged on purpose, for a person to check | 2/2 flagged |
+| A sentence with no number or quotation | not checked | not checked |
+
+**Part 2, an assistant with and without evcheck** ([`v5/results/tool-use.md`](v5/results/tool-use.md)). Eight writing tasks (a brief, a notice, a summary), Claude Haiku 5.5 at effort medium, the same sources in the prompt in both arms; the tool arm can also call `check_draft`, which runs evcheck on its draft. Each task ran twice per arm, 32 conversations, all through the Message Batches API: US$0.0092 in all.
+
+| 16 final answers per arm | Without the tool | With the tool |
+|---|---|---|
+| Numbers stated (distinct, per answer, summed) | 159 | 152 |
+| **Numbers in no line of any source** (the measure fixed in advance) | **6**, in 3 answers | **0** |
+| Sentences evcheck flags in the final answer | 17 | 1 |
+| Answers where the tool was called | — | 16 (24 calls) |
+
+The expectation fixed in advance (fewer numbers outside the sources with the tool, a similar count of numbers) holds. Read one by one, though, **none of the 6 is a wrong figure**: two are the numbers of a numbered list (`1.`, `4.`), two are counts the answers made themselves (`三店`, three stores, in two answers), and two are growth rates worked out correctly from the table (`about 14.8%`, `about 14.2%`). In these tasks Haiku did not invent or change a figure, as in v2. What the tool changed is that every number in the final answers can be traced to a line of the sources.
+
+The 18 sentences evcheck flagged in the final answers (17 without the tool, 1 with it) are of two kinds:
+
+- **8 numbers worked out by the writer**, flagged as designed: the counts and the growth rates above, and `two main changes`.
+- **10 false alarms**: sentences that join facts from different lines of a source (`活动时间为 11 月 11 日至 13 日，会员第二杯半价……`, `In October 2026, eight readers were interviewed, and six of them said ...`). evcheck picks at most three source lines by their words, missed the line holding one of the facts, and reported its number as not found. Part 1's drafts state one fact per sentence, which is why it showed no false alarm.
+
+The assistant with the tool answered those false alarms by splitting or rewording the sentences, and in one answer, after five checks, by dropping a correct fact (the limit of two coupons a day). Picking source lines so that every number of a sentence is covered is the next change to make; it will be measured on new cases fixed in advance.
+
 ## Limits
 
 - The documents and drafts are synthetic and were written by the same author as the skill, with the labels fixed when the cases were written. Planted errors may be easier to spot than real ones.
 - The automatic flag "number outside the passages relevant to the question" is only a pointer; every case is listed in the summary. Read against the documents, the flagged numbers other than the 32-hour calculation and its parts are correct details from passages the list left out (age limit, team size, a deposit or prize rule named as the closest passage), the "1" in "update notice 1", "two" in "where the two differ", and "a two-day event".
 - Claude's [Citations](https://platform.claude.com/docs/en/build-with-claude/citations) feature, which extracts quotes straight from the documents, was not one of the arms: it cannot be combined with the structured JSON output that every arm used.
 - One model at one effort level, two runs of each case, one day. With these counts, a difference of one or two items is noise.
+- v5 was written by the same author as evcheck, who knows its rules; Part 2 has eight tasks and two runs per arm.

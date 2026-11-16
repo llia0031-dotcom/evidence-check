@@ -1,0 +1,327 @@
+{
+ "about": "v5 cases for the evcheck command line, written on 2026-11-17 before evcheck was written; every label was fixed when the case was written. kind: correct (should pass), error (a changed or invented number or quote; should be flagged), meaning (wrong, but its numbers and quotes are in the sources; expected to pass), limit (a number worked out from the sources; flagged on purpose), skip (no number and no quote).",
+ "sets": [
+  {
+   "id": "A",
+   "lang": "zh",
+   "draft": "sets/A/周报.md",
+   "sources": "sets/A/sources",
+   "sentences": [
+    {
+     "marker": "12.8 万元",
+     "kind": "correct",
+     "text": "杭州湖滨店本周订单 3,412 单，GMV 约 12.8 万元。"
+    },
+    {
+     "marker": "退款率 3.1%",
+     "kind": "correct",
+     "text": "上海静安店客单价 42 元，退款率 3.1%。"
+    },
+    {
+     "marker": "1,978 单",
+     "kind": "error",
+     "text": "南京新街口店本周订单 1,978 单。"
+    },
+    {
+     "marker": "都低于 3%",
+     "kind": "error",
+     "text": "三家店的退款率都低于 3%。"
+    },
+    {
+     "marker": "11 月 13 日",
+     "kind": "correct",
+     "text": "活动时间是 11 月 11 日至 11 月 13 日。"
+    },
+    {
+     "marker": "第二杯八折",
+     "kind": "correct",
+     "text": "会员第二杯半价，非会员第二杯八折。"
+    },
+    {
+     "marker": "3 张优惠券",
+     "kind": "error",
+     "text": "每位顾客每天最多使用 3 张优惠券。"
+    },
+    {
+     "marker": "先看复购",
+     "kind": "correct",
+     "text": "区域经理在启动会上说：“这次活动先看复购，不追求单量。”"
+    },
+    {
+     "marker": "都要冲刺",
+     "kind": "error",
+     "text": "区域经理强调：“复购比单量更重要，所有门店都要冲刺。”"
+    },
+    {
+     "marker": "积分加倍",
+     "kind": "meaning",
+     "text": "活动期间积分加倍。"
+    },
+    {
+     "marker": "38%",
+     "kind": "error",
+     "text": "新客占比达到 38%。"
+    },
+    {
+     "marker": "外卖满减",
+     "kind": "skip",
+     "text": "下周计划在南京新街口店试点外卖满减。"
+    },
+    {
+     "marker": "8,289",
+     "kind": "limit",
+     "text": "三家店本周合计订单 8,289 单。"
+    }
+   ]
+  },
+  {
+   "id": "B",
+   "lang": "en",
+   "draft": "sets/B/update.docx",
+   "sources": "sets/B/sources",
+   "sentences": [
+    {
+     "marker": "47,310",
+     "kind": "correct",
+     "text": "Active users reached 47,310 in October, up from 43,950 in September."
+    },
+    {
+     "marker": "30.5%",
+     "kind": "correct",
+     "text": "Thirty-day retention rose to 30.5% in October."
+    },
+    {
+     "marker": "$110,240",
+     "kind": "correct",
+     "text": "Revenue was $110,240 in October."
+    },
+    {
+     "marker": "grew 12%",
+     "kind": "error",
+     "text": "Revenue grew 12% from August to October."
+    },
+    {
+     "marker": "shipped on 14 October",
+     "kind": "correct",
+     "text": "Version 4.2 shipped on 14 October 2026."
+    },
+    {
+     "marker": "60 days",
+     "kind": "error",
+     "text": "Offline mode keeps the last 60 days of notes on the device."
+    },
+    {
+     "marker": "3 steps instead of 5",
+     "kind": "correct",
+     "text": "The new onboarding flow has 3 steps instead of 5."
+    },
+    {
+     "marker": "Dark mode shipped",
+     "kind": "meaning",
+     "text": "Dark mode shipped in version 4.2."
+    },
+    {
+     "marker": "most requested feature",
+     "kind": "correct",
+     "text": "Mira Osei said: \"Offline mode was the most requested feature for two years.\""
+    },
+    {
+     "marker": "changed how people use",
+     "kind": "error",
+     "text": "As Mira Osei put it, \"offline mode changed how people use the app.\""
+    },
+    {
+     "marker": "$101,800",
+     "kind": "correct",
+     "text": "September revenue was $101,800."
+    },
+    {
+     "marker": "50,000",
+     "kind": "error",
+     "text": "We now have over 50,000 active users."
+    }
+   ]
+  },
+  {
+   "id": "C",
+   "lang": "zh",
+   "draft": "sets/C/公告.md",
+   "sources": "sets/C/sources",
+   "sentences": [
+    {
+     "marker": "2 月 20 日截止",
+     "kind": "correct",
+     "text": "报名从 2 月 1 日开始，到 2 月 20 日截止。"
+    },
+    {
+     "marker": "八小时",
+     "kind": "correct",
+     "text": "每位志愿者每月至少服务八小时。"
+    },
+    {
+     "marker": "16 周岁",
+     "kind": "error",
+     "text": "报名条件是年满 16 周岁。"
+    },
+    {
+     "marker": "3 次线下培训",
+     "kind": "correct",
+     "text": "需要参加 3 次线下培训。"
+    },
+    {
+     "marker": "交通费 20 元",
+     "kind": "correct",
+     "text": "每次服务补贴交通费 20 元。"
+    },
+    {
+     "marker": "200 元餐补",
+     "kind": "error",
+     "text": "志愿者每月还有 200 元餐补。"
+    },
+    {
+     "marker": "四十人",
+     "kind": "correct",
+     "text": "首批招募四十人。"
+    },
+    {
+     "marker": "不再接受报名",
+     "kind": "meaning",
+     "text": "首批招募 40 人，满额后不再接受报名。"
+    },
+    {
+     "marker": "稳定的时间投入",
+     "kind": "correct",
+     "text": "负责人表示：“我们更看重稳定的时间投入，而不是经验。”"
+    },
+    {
+     "marker": "优先录取",
+     "kind": "error",
+     "text": "负责人表示：“有经验的志愿者会优先录取。”"
+    },
+    {
+     "marker": "共三周",
+     "kind": "limit",
+     "text": "报名时间共三周。"
+    }
+   ]
+  },
+  {
+   "id": "D",
+   "lang": "en",
+   "draft": "sets/D/summary.md",
+   "sources": "sets/D/sources",
+   "sentences": [
+    {
+     "marker": "214 responses",
+     "kind": "correct",
+     "text": "The survey had 214 responses."
+    },
+    {
+     "marker": "62% of readers",
+     "kind": "correct",
+     "text": "62% of readers find the weekly digest useful."
+    },
+    {
+     "marker": "71% read",
+     "kind": "correct",
+     "text": "71% read the digest on mobile."
+    },
+    {
+     "marker": "Only 28%",
+     "kind": "error",
+     "text": "Only 28% think the digest is too long."
+    },
+    {
+     "marker": "interviewed eight readers",
+     "kind": "correct",
+     "text": "We interviewed eight readers in October 2026."
+    },
+    {
+     "marker": "skim the headlines",
+     "kind": "correct",
+     "text": "One reader said: \"I skim the headlines on the train and save the long pieces for Sunday.\""
+    },
+    {
+     "marker": "the only thing I look at",
+     "kind": "error",
+     "text": "Another said: \"The charts are the only thing I look at.\""
+    },
+    {
+     "marker": "Six of the eight",
+     "kind": "correct",
+     "text": "Six of the eight readers read the digest on a phone."
+    },
+    {
+     "marker": "daily edition",
+     "kind": "meaning",
+     "text": "Most readers want a daily edition."
+    },
+    {
+     "marker": "pay for a longer version",
+     "kind": "error",
+     "text": "A reader told us: \"I would pay for a longer version.\""
+    },
+    {
+     "marker": "from 12% to 30%",
+     "kind": "correct",
+     "text": "Neutral answers ranged from 12% to 30%."
+    },
+    {
+     "marker": "45% of readers",
+     "kind": "error",
+     "text": "45% of readers disagree that the digest is useful."
+    }
+   ]
+  }
+ ],
+ "tasks": [
+  {
+   "id": "TA1",
+   "set": "A",
+   "lang": "zh",
+   "prompt": "根据资料，给区域经理写 4 句话的本周门店简报。"
+  },
+  {
+   "id": "TA2",
+   "set": "A",
+   "lang": "zh",
+   "prompt": "根据资料，用 3 句话向会员介绍双 11 活动规则。"
+  },
+  {
+   "id": "TB1",
+   "set": "B",
+   "lang": "en",
+   "prompt": "Using the files, write a short paragraph for the board on Larchwood's growth from August to October."
+  },
+  {
+   "id": "TB2",
+   "set": "B",
+   "lang": "en",
+   "prompt": "Using the files, summarise for users what shipped in version 4.2, in 3 sentences."
+  },
+  {
+   "id": "TC1",
+   "set": "C",
+   "lang": "zh",
+   "prompt": "根据资料，写一段 100 字左右的志愿者招募公告。"
+  },
+  {
+   "id": "TC2",
+   "set": "C",
+   "lang": "zh",
+   "prompt": "根据资料回答：报名需要满足哪些条件？有什么补贴？"
+  },
+  {
+   "id": "TD1",
+   "set": "D",
+   "lang": "en",
+   "prompt": "Using the files, summarise the survey and the interviews for the editor in 4 sentences."
+  },
+  {
+   "id": "TD2",
+   "set": "D",
+   "lang": "en",
+   "prompt": "Using the files, tell the editor in 3 sentences what readers say about the digest's length."
+  }
+ ]
+}

@@ -29,7 +29,7 @@ import unicodedata
 from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from pathlib import Path
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 
 TEXT_EXTENSIONS = {
     ".md", ".markdown", ".txt", ".rst", ".csv", ".tsv", ".json", ".jsonl",
@@ -209,6 +209,7 @@ CN_NOT_NUMBERS = [
     r"一[次个件条项处位名回]?(?=[都也](?:没|不|未|无))",  # 一次都没变: never changed
     r"(?<![零〇一二两三四五六七八九十\d.])[百千](?=[万亿])",  # 每百万: per million
     r"(?<=[数几上成])[百千]",  # 数百, 上千: hundreds, thousands
+    r"百分点",  # 3.2 个百分点: percentage points, not 100
 ]
 
 
@@ -606,6 +607,18 @@ def _rounded_from(n, steps, quote_numbers):
     return None
 
 
+def _decimals_as_percent(quote_numbers) -> dict:
+    """{0.305 written as a percentage ("30.5"): "0.305"} for the quote's decimals between 0 and 1."""
+    out = {}
+    for q in quote_numbers:
+        if "/" in q or ":" in q:
+            continue
+        d = Decimal(q)
+        if 0 < d < 1:
+            out[_canon_dec(d * 100)] = q
+    return out
+
+
 def _same_as_percent(n, claim_percents, quote_numbers, quote_percents) -> bool:
     """99.6% in a claim matches 0.996 in a quote, and 0.996 matches 99.6%."""
     if "/" in n or ":" in n:
@@ -666,6 +679,12 @@ def check_claim(claim, sources):
             if source_number is not None:
                 rounded.append({"claim": n, "quote": source_number})
                 continue
+            if n in claim_percents:  # 31% for a quote's 0.305: a decimal as a percentage, then rounded
+                as_percent = _decimals_as_percent(quote_numbers)
+                source_number = _rounded_from(n, claim_steps, set(as_percent))
+                if source_number is not None:
+                    rounded.append({"claim": n + "%", "quote": as_percent[source_number]})
+                    continue
             missing.append(n)
         if missing:
             problems.add("numbers_not_in_quote")

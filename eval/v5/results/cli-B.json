@@ -1,0 +1,346 @@
+{
+ "draft": "update.docx",
+ "sources": [
+  "metrics.xlsx",
+  "release-notes.md"
+ ],
+ "summary": {
+  "checked": 12,
+  "supported": 8,
+  "flagged": 4,
+  "not_checked": 0
+ },
+ "sentences": [
+  {
+   "line": 3,
+   "text": "Active users reached 47,310 in October, up from 43,950 in September.",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 2",
+     "line": 2,
+     "text": "month: 2026-08 | active_users: 41200 | d30_retention: 0.284 | revenue_usd: 96500"
+    },
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 3",
+     "line": 3,
+     "text": "month: 2026-09 | active_users: 43950 | d30_retention: 0.291 | revenue_usd: 101800"
+    },
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 4",
+     "line": 4,
+     "text": "month: 2026-10 | active_users: 47310 | d30_retention: 0.305 | revenue_usd: 110240"
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 5,
+   "text": "Thirty-day retention rose to 30.5% in October.",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 2",
+     "line": 2,
+     "text": "month: 2026-08 | active_users: 41200 | d30_retention: 0.284 | revenue_usd: 96500"
+    },
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 3",
+     "line": 3,
+     "text": "month: 2026-09 | active_users: 43950 | d30_retention: 0.291 | revenue_usd: 101800"
+    },
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 4",
+     "line": 4,
+     "text": "month: 2026-10 | active_users: 47310 | d30_retention: 0.305 | revenue_usd: 110240"
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 7,
+   "text": "Revenue was $110,240 in October.",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 2",
+     "line": 2,
+     "text": "month: 2026-08 | active_users: 41200 | d30_retention: 0.284 | revenue_usd: 96500"
+    },
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 3",
+     "line": 3,
+     "text": "month: 2026-09 | active_users: 43950 | d30_retention: 0.291 | revenue_usd: 101800"
+    },
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 4",
+     "line": 4,
+     "text": "month: 2026-10 | active_users: 47310 | d30_retention: 0.305 | revenue_usd: 110240"
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 9,
+   "text": "Revenue grew 12% from August to October.",
+   "status": "numbers_not_in_source",
+   "problems": [
+    {
+     "kind": "numbers_not_in_source"
+    }
+   ],
+   "missing_numbers": [
+    "12"
+   ],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 2",
+     "line": 2,
+     "text": "month: 2026-08 | active_users: 41200 | d30_retention: 0.284 | revenue_usd: 96500"
+    },
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 3",
+     "line": 3,
+     "text": "month: 2026-09 | active_users: 43950 | d30_retention: 0.291 | revenue_usd: 101800"
+    },
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 4",
+     "line": 4,
+     "text": "month: 2026-10 | active_users: 47310 | d30_retention: 0.305 | revenue_usd: 110240"
+    }
+   ],
+   "nearest": {
+    "file": "metrics.xlsx",
+    "place": "Monthly, row 2",
+    "line": 2,
+    "text": "month: 2026-08 | active_users: 41200 | d30_retention: 0.284 | revenue_usd: 96500"
+   }
+  },
+  {
+   "line": 11,
+   "text": "Version 4.2 shipped on 14 October 2026.",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "release-notes.md",
+     "place": "line 5",
+     "line": 5,
+     "text": "- Version 4.2 shipped on 14 October 2026 with offline mode and a new onboarding flow."
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 13,
+   "text": "Offline mode keeps the last 60 days of notes on the device.",
+   "status": "numbers_not_in_source",
+   "problems": [
+    {
+     "kind": "numbers_not_in_source"
+    }
+   ],
+   "missing_numbers": [
+    "60"
+   ],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "release-notes.md",
+     "place": "line 6",
+     "line": 6,
+     "text": "- Offline mode keeps the last 30 days of notes on the device."
+    }
+   ],
+   "nearest": {
+    "file": "release-notes.md",
+    "place": "line 6",
+    "line": 6,
+    "text": "- Offline mode keeps the last 30 days of notes on the device."
+   }
+  },
+  {
+   "line": 15,
+   "text": "The new onboarding flow has 3 steps instead of 5.",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "release-notes.md",
+     "place": "line 7",
+     "line": 7,
+     "text": "- The new onboarding flow has 3 steps instead of 5."
+    },
+    {
+     "file": "release-notes.md",
+     "place": "line 5",
+     "line": 5,
+     "text": "- Version 4.2 shipped on 14 October 2026 with offline mode and a new onboarding flow."
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 17,
+   "text": "Dark mode shipped in version 4.2.",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "release-notes.md",
+     "place": "line 5",
+     "line": 5,
+     "text": "- Version 4.2 shipped on 14 October 2026 with offline mode and a new onboarding flow."
+    },
+    {
+     "file": "release-notes.md",
+     "place": "line 8",
+     "line": 8,
+     "text": "- Dark mode is planned for version 4.3, not 4.2."
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 19,
+   "text": "Mira Osei said: \"Offline mode was the most requested feature for two years.\"",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "release-notes.md",
+     "place": "line 10",
+     "line": 10,
+     "text": "Product lead Mira Osei said: \"Offline mode was the most requested feature for two years.\""
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 21,
+   "text": "As Mira Osei put it, \"offline mode changed how people use the app.\"",
+   "status": "quote_not_found",
+   "problems": [
+    {
+     "kind": "quote_not_found",
+     "quote": "offline mode changed how people use the app."
+    }
+   ],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "release-notes.md",
+     "place": "line 10",
+     "line": 10,
+     "text": "Product lead Mira Osei said: \"Offline mode was the most requested feature for two years.\""
+    }
+   ],
+   "nearest": {
+    "file": "release-notes.md",
+    "place": "line 5",
+    "line": 5,
+    "text": "- Version 4.2 shipped on 14 October 2026 with offline mode and a new onboarding flow."
+   }
+  },
+  {
+   "line": 23,
+   "text": "September revenue was $101,800.",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 2",
+     "line": 2,
+     "text": "month: 2026-08 | active_users: 41200 | d30_retention: 0.284 | revenue_usd: 96500"
+    },
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 3",
+     "line": 3,
+     "text": "month: 2026-09 | active_users: 43950 | d30_retention: 0.291 | revenue_usd: 101800"
+    },
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 4",
+     "line": 4,
+     "text": "month: 2026-10 | active_users: 47310 | d30_retention: 0.305 | revenue_usd: 110240"
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 25,
+   "text": "We now have over 50,000 active users.",
+   "status": "numbers_not_in_source",
+   "problems": [
+    {
+     "kind": "numbers_not_in_source"
+    }
+   ],
+   "missing_numbers": [
+    "50000"
+   ],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 2",
+     "line": 2,
+     "text": "month: 2026-08 | active_users: 41200 | d30_retention: 0.284 | revenue_usd: 96500"
+    },
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 3",
+     "line": 3,
+     "text": "month: 2026-09 | active_users: 43950 | d30_retention: 0.291 | revenue_usd: 101800"
+    },
+    {
+     "file": "metrics.xlsx",
+     "place": "Monthly, row 4",
+     "line": 4,
+     "text": "month: 2026-10 | active_users: 47310 | d30_retention: 0.305 | revenue_usd: 110240"
+    }
+   ],
+   "nearest": {
+    "file": "metrics.xlsx",
+    "place": "Monthly, row 2",
+    "line": 2,
+    "text": "month: 2026-08 | active_users: 41200 | d30_retention: 0.284 | revenue_usd: 96500"
+   }
+  }
+ ]
+}

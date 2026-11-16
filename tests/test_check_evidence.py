@@ -94,6 +94,22 @@ class Rules030(Base):
         self.assertEqual(ce.numbers_in("数百人"), set())
         self.assertEqual(ce.numbers_in("三百人"), {"300"})
 
+    def test_rounded_percentage_of_a_decimal(self):
+        # 0.5.0: 31% for a quote's 0.305 is a decimal written as a percentage and rounded.
+        (self.dir / "docs" / "m.md").write_text("Retention was 0.305 in October.\n", encoding="utf-8")
+        self.sources = ce.load_sources([str(self.dir / "docs")])
+        r = self.claim("Retention was 31% in October.", ("m.md", "Retention was 0.305 in October."))
+        self.assertEqual(r["status"], "supported")
+        self.assertEqual(r["rounded"], [{"claim": "31%", "quote": "0.305"}])
+        self.assertEqual(self.claim("Retention was 32% in October.", ("m.md", "Retention was 0.305 in October."))["missing_numbers"], ["32"])
+        self.assertEqual(self.claim("Retention was 3% in October.", ("m.md", "Retention was 0.305 in October."))["missing_numbers"], ["3"])
+
+    def test_percentage_points_are_not_a_hundred(self):
+        # 0.5.0: 百分点 is a unit, as in "环比上升 3.2 个百分点".
+        self.assertEqual(ce.numbers_in("环比上升 3.2 个百分点"), {"3.2"})
+        self.assertEqual(ce.numbers_in("上升三个百分点"), {"3"})
+        self.assertEqual(ce.numbers_in("百分之五十"), {"50"})
+
     def test_wan_and_million_scale_the_number(self):
         self.assertEqual(ce.numbers_in("4.3万人"), {"43000"})
         self.assertEqual(ce.numbers_in("三万人"), {"30000"})

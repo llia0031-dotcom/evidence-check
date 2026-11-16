@@ -1,0 +1,250 @@
+{
+ "draft": "公告.md",
+ "sources": [
+  "招募规则.md"
+ ],
+ "summary": {
+  "checked": 11,
+  "supported": 7,
+  "flagged": 4,
+  "not_checked": 0
+ },
+ "sentences": [
+  {
+   "line": 2,
+   "text": "报名从 2 月 1 日开始，到 2 月 20 日截止。",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "招募规则.md",
+     "place": "line 5",
+     "line": 5,
+     "text": "- 报名时间：2027 年 2 月 1 日至 2 月 20 日。"
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 3,
+   "text": "每位志愿者每月至少服务八小时。",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "招募规则.md",
+     "place": "line 6",
+     "line": 6,
+     "text": "- 每位志愿者每月至少服务 8 小时。"
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 4,
+   "text": "报名条件是年满 16 周岁。",
+   "status": "numbers_not_in_source",
+   "problems": [
+    {
+     "kind": "numbers_not_in_source"
+    }
+   ],
+   "missing_numbers": [
+    "16"
+   ],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "招募规则.md",
+     "place": "line 7",
+     "line": 7,
+     "text": "- 年满 18 周岁、能参加 3 次线下培训的人可以报名。"
+    }
+   ],
+   "nearest": {
+    "file": "招募规则.md",
+    "place": "line 7",
+    "line": 7,
+    "text": "- 年满 18 周岁、能参加 3 次线下培训的人可以报名。"
+   }
+  },
+  {
+   "line": 5,
+   "text": "需要参加 3 次线下培训。",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "招募规则.md",
+     "place": "line 7",
+     "line": 7,
+     "text": "- 年满 18 周岁、能参加 3 次线下培训的人可以报名。"
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 6,
+   "text": "每次服务补贴交通费 20 元。",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "招募规则.md",
+     "place": "line 8",
+     "line": 8,
+     "text": "- 志愿者每次服务补贴交通费 20 元，不发放其他报酬。"
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 7,
+   "text": "志愿者每月还有 200 元餐补。",
+   "status": "numbers_not_in_source",
+   "problems": [
+    {
+     "kind": "numbers_not_in_source"
+    }
+   ],
+   "missing_numbers": [
+    "200"
+   ],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "招募规则.md",
+     "place": "line 6",
+     "line": 6,
+     "text": "- 每位志愿者每月至少服务 8 小时。"
+    },
+    {
+     "file": "招募规则.md",
+     "place": "line 8",
+     "line": 8,
+     "text": "- 志愿者每次服务补贴交通费 20 元，不发放其他报酬。"
+    }
+   ],
+   "nearest": {
+    "file": "招募规则.md",
+    "place": "line 6",
+    "line": 6,
+    "text": "- 每位志愿者每月至少服务 8 小时。"
+   }
+  },
+  {
+   "line": 8,
+   "text": "首批招募四十人。",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "招募规则.md",
+     "place": "line 9",
+     "line": 9,
+     "text": "- 首批招募 40 人，满额后进入候补名单。"
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 9,
+   "text": "首批招募 40 人，满额后不再接受报名。",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "招募规则.md",
+     "place": "line 9",
+     "line": 9,
+     "text": "- 首批招募 40 人，满额后进入候补名单。"
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 10,
+   "text": "负责人表示：“我们更看重稳定的时间投入，而不是经验。”",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "招募规则.md",
+     "place": "line 11",
+     "line": 11,
+     "text": "负责人在说明会上表示：“我们更看重稳定的时间投入，而不是经验。”"
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 11,
+   "text": "负责人表示：“有经验的志愿者会优先录取。”",
+   "status": "quote_not_found",
+   "problems": [
+    {
+     "kind": "quote_not_found",
+     "quote": "有经验的志愿者会优先录取。"
+    }
+   ],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "招募规则.md",
+     "place": "line 11",
+     "line": 11,
+     "text": "负责人在说明会上表示：“我们更看重稳定的时间投入，而不是经验。”"
+    }
+   ],
+   "nearest": {
+    "file": "招募规则.md",
+    "place": "line 1",
+    "line": 1,
+    "text": "# 2027 春季读书会志愿者招募规则"
+   }
+  },
+  {
+   "line": 12,
+   "text": "报名时间共三周。",
+   "status": "numbers_not_in_source",
+   "problems": [
+    {
+     "kind": "numbers_not_in_source"
+    }
+   ],
+   "missing_numbers": [
+    "3"
+   ],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "招募规则.md",
+     "place": "line 5",
+     "line": 5,
+     "text": "- 报名时间：2027 年 2 月 1 日至 2 月 20 日。"
+    }
+   ],
+   "nearest": {
+    "file": "招募规则.md",
+    "place": "line 5",
+    "line": 5,
+    "text": "- 报名时间：2027 年 2 月 1 日至 2 月 20 日。"
+   }
+  }
+ ]
+}

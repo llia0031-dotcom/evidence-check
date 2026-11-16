@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "evcheck"
+version = "0.5.0"
+description = "Check every number and quotation in a finished draft against your own files, offline, before you send it."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+authors = [{ name = "Liang Liyuan" }]
+keywords = ["fact-checking", "citations", "hallucination", "cli", "mcp", "agent-skills"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Environment :: Console",
+  "Topic :: Text Processing",
+  "Natural Language :: Chinese (Simplified)",
+  "Natural Language :: English",
+]
+dependencies = []
+
+[project.optional-dependencies]
+docs = ["markitdown[docx,pdf,pptx,xlsx]>=0.1.2; python_version >= '3.10'", "openpyxl>=3.1", "python-docx>=1.1"]
+mcp = ["mcp>=1.2; python_version >= '3.10'"]
+llm = ["anthropic>=2.9; python_version >= '3.10'"]
+all = ["evcheck[docs,mcp,llm]"]
+
+[project.scripts]
+evcheck = "evcheck.cli:main"
+evcheck-mcp = "evcheck.mcp_server:main"
+
+[project.urls]
+Homepage = "https://github.com/Jason-d-e/evidence-check"
+Issues = "https://github.com/Jason-d-e/evidence-check/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["evcheck"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"skills/evidence-check/scripts/check_evidence.py" = "evcheck/_rules.py"
+
+[tool.hatch.build.targets.sdist]
+include = ["evcheck", "skills/evidence-check/scripts/check_evidence.py", "README.md", "README.zh-CN.md", "LICENSE", "pyproject.toml"]

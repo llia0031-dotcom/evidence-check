@@ -1,0 +1,310 @@
+{
+ "draft": "summary.md",
+ "sources": [
+  "interviews.md",
+  "survey.csv"
+ ],
+ "summary": {
+  "checked": 11,
+  "supported": 7,
+  "flagged": 4,
+  "not_checked": 1
+ },
+ "sentences": [
+  {
+   "line": 2,
+   "text": "The survey had 214 responses.",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "survey.csv",
+     "place": "row 2",
+     "line": 2,
+     "text": "question: The weekly digest is useful | agree: 0.62 | neutral: 0.21 | disagree: 0.17 | responses: 214"
+    },
+    {
+     "file": "survey.csv",
+     "place": "row 3",
+     "line": 3,
+     "text": "question: I read the digest on mobile | agree: 0.71 | neutral: 0.12 | disagree: 0.17 | responses: 214"
+    },
+    {
+     "file": "survey.csv",
+     "place": "row 4",
+     "line": 4,
+     "text": "question: The digest is too long | agree: 0.38 | neutral: 0.30 | disagree: 0.32 | responses: 214"
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 3,
+   "text": "62% of readers find the weekly digest useful.",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "survey.csv",
+     "place": "row 2",
+     "line": 2,
+     "text": "question: The weekly digest is useful | agree: 0.62 | neutral: 0.21 | disagree: 0.17 | responses: 214"
+    },
+    {
+     "file": "interviews.md",
+     "place": "line 1",
+     "line": 1,
+     "text": "# Reader interviews, Harbor Weekly"
+    },
+    {
+     "file": "interviews.md",
+     "place": "line 3",
+     "line": 3,
+     "text": "Harbor Weekly is a fictional newsletter. Eight readers were interviewed in October 2026."
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 4,
+   "text": "71% read the digest on mobile.",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "survey.csv",
+     "place": "row 3",
+     "line": 3,
+     "text": "question: I read the digest on mobile | agree: 0.71 | neutral: 0.12 | disagree: 0.17 | responses: 214"
+    },
+    {
+     "file": "interviews.md",
+     "place": "line 9",
+     "line": 9,
+     "text": "Six of the eight readers said they read the digest on a phone."
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 5,
+   "text": "Only 28% think the digest is too long.",
+   "status": "numbers_not_in_source",
+   "problems": [
+    {
+     "kind": "numbers_not_in_source"
+    }
+   ],
+   "missing_numbers": [
+    "28"
+   ],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "survey.csv",
+     "place": "row 4",
+     "line": 4,
+     "text": "question: The digest is too long | agree: 0.38 | neutral: 0.30 | disagree: 0.32 | responses: 214"
+    }
+   ],
+   "nearest": {
+    "file": "survey.csv",
+    "place": "row 4",
+    "line": 4,
+    "text": "question: The digest is too long | agree: 0.38 | neutral: 0.30 | disagree: 0.32 | responses: 214"
+   }
+  },
+  {
+   "line": 6,
+   "text": "We interviewed eight readers in October 2026.",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "interviews.md",
+     "place": "line 3",
+     "line": 3,
+     "text": "Harbor Weekly is a fictional newsletter. Eight readers were interviewed in October 2026."
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 7,
+   "text": "One reader said: \"I skim the headlines on the train and save the long pieces for Sunday.\"",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "interviews.md",
+     "place": "line 5",
+     "line": 5,
+     "text": "- Reader 3: \"I skim the headlines on the train and save the long pieces for Sunday.\""
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 8,
+   "text": "Another said: \"The charts are the only thing I look at.\"",
+   "status": "quote_not_found",
+   "problems": [
+    {
+     "kind": "quote_not_found",
+     "quote": "The charts are the only thing I look at."
+    }
+   ],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "interviews.md",
+     "place": "line 6",
+     "line": 6,
+     "text": "- Reader 5: \"The charts are the first thing I look at.\""
+    }
+   ],
+   "nearest": {
+    "file": "interviews.md",
+    "place": "line 6",
+    "line": 6,
+    "text": "- Reader 5: \"The charts are the first thing I look at.\""
+   }
+  },
+  {
+   "line": 9,
+   "text": "Six of the eight readers read the digest on a phone.",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "interviews.md",
+     "place": "line 9",
+     "line": 9,
+     "text": "Six of the eight readers said they read the digest on a phone."
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 11,
+   "text": "A reader told us: \"I would pay for a longer version.\"",
+   "status": "quote_not_found",
+   "problems": [
+    {
+     "kind": "quote_not_found",
+     "quote": "I would pay for a longer version."
+    }
+   ],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "interviews.md",
+     "place": "line 5",
+     "line": 5,
+     "text": "- Reader 3: \"I skim the headlines on the train and save the long pieces for Sunday.\""
+    },
+    {
+     "file": "interviews.md",
+     "place": "line 6",
+     "line": 6,
+     "text": "- Reader 5: \"The charts are the first thing I look at.\""
+    },
+    {
+     "file": "interviews.md",
+     "place": "line 7",
+     "line": 7,
+     "text": "- Reader 7: \"If it were shorter I would read it every week.\""
+    }
+   ],
+   "nearest": {
+    "file": "interviews.md",
+    "place": "line 5",
+    "line": 5,
+    "text": "- Reader 3: \"I skim the headlines on the train and save the long pieces for Sunday.\""
+   }
+  },
+  {
+   "line": 12,
+   "text": "Neutral answers ranged from 12% to 30%.",
+   "status": "supported",
+   "problems": [],
+   "missing_numbers": [],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "survey.csv",
+     "place": "row 2",
+     "line": 2,
+     "text": "question: The weekly digest is useful | agree: 0.62 | neutral: 0.21 | disagree: 0.17 | responses: 214"
+    },
+    {
+     "file": "survey.csv",
+     "place": "row 3",
+     "line": 3,
+     "text": "question: I read the digest on mobile | agree: 0.71 | neutral: 0.12 | disagree: 0.17 | responses: 214"
+    },
+    {
+     "file": "survey.csv",
+     "place": "row 4",
+     "line": 4,
+     "text": "question: The digest is too long | agree: 0.38 | neutral: 0.30 | disagree: 0.32 | responses: 214"
+    }
+   ],
+   "nearest": null
+  },
+  {
+   "line": 13,
+   "text": "45% of readers disagree that the digest is useful.",
+   "status": "numbers_not_in_source",
+   "problems": [
+    {
+     "kind": "numbers_not_in_source"
+    }
+   ],
+   "missing_numbers": [
+    "45"
+   ],
+   "rounded": [],
+   "evidence": [
+    {
+     "file": "survey.csv",
+     "place": "row 2",
+     "line": 2,
+     "text": "question: The weekly digest is useful | agree: 0.62 | neutral: 0.21 | disagree: 0.17 | responses: 214"
+    },
+    {
+     "file": "interviews.md",
+     "place": "line 9",
+     "line": 9,
+     "text": "Six of the eight readers said they read the digest on a phone."
+    },
+    {
+     "file": "survey.csv",
+     "place": "row 3",
+     "line": 3,
+     "text": "question: I read the digest on mobile | agree: 0.71 | neutral: 0.12 | disagree: 0.17 | responses: 214"
+    }
+   ],
+   "nearest": {
+    "file": "survey.csv",
+    "place": "row 2",
+    "line": 2,
+    "text": "question: The weekly digest is useful | agree: 0.62 | neutral: 0.21 | disagree: 0.17 | responses: 214"
+   }
+  }
+ ]
+}
