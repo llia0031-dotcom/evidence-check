@@ -5,7 +5,7 @@ Check that every number and quotation in a draft is really in your own files, be
 - **evcheck**, a command-line tool and MCP server. Give it a finished draft and the folder it was written from; it lists every sentence whose number or quotation is not in those files, with the closest line. Offline, no model, no account.
 - **An [Agent Skill](https://agentskills.io)** that makes an AI quote its source word for word for every fact it writes, and checks the quotes with the same rules.
 
-[中文说明](README.zh-CN.md)
+[中文说明](https://github.com/llia0031-dotcom/evidence-check/blob/main/README.zh-CN.md)
 
 ## Check a draft in one line
 
@@ -21,7 +21,7 @@ Run:
 evcheck summary.md --sources data/
 ```
 
-Result, for the example in [`eval/v5/sets/D`](eval/v5/sets/D) (11 sentences checked; two of the four problems shown):
+Result, for the example in [`eval/v5/sets/D`](https://github.com/llia0031-dotcom/evidence-check/tree/main/eval/v5/sets/D) (11 sentences checked; two of the four problems shown):
 
 ```
  ✗  line 5  Only 28% think the digest is too long.
@@ -38,7 +38,7 @@ Result, for the example in [`eval/v5/sets/D`](eval/v5/sets/D) (11 sentences chec
 
 `--html report.html` writes the same result as a page to share:
 
-![The HTML report for the example: 11 sentences checked, 4 not found, each with the closest line of the sources](images/report-en.png)
+![The HTML report for the example: 11 sentences checked, 4 not found, each with the closest line of the sources](https://raw.githubusercontent.com/llia0031-dotcom/evidence-check/main/images/report-en.png)
 
 - **Drafts:** Markdown, text, Word, PDF, web pages. **Sources:** files or folders of the same, plus CSV and Excel; each table row is read with its column names.
 - **Exit code** 1 when a sentence is not found, 0 when all are, 2 when a file cannot be read, so it can stop a script or a CI step. `--json -` prints the full result, `--problems-only` hides the sentences that were found, `--lang zh` gives Chinese labels.
@@ -108,7 +108,7 @@ Output for four claims against the example documents in `eval/v2/sources`:
 | 3 | 押金是50令吉。 | Supported | B01-build-weekend-handbook.md, line 35: "A place is confirmed only after a refundable deposit of RM 50 is paid." |
 | 4 | Every participant gets a free T-shirt. | No evidence given | — |
 
-Exit code 0 means every claim passed, 1 that at least one did not, 2 that the input could not be read. `--format json` gives the full report, `--lang zh` Chinese labels. Field reference and matching rules: [`references/claims-format.md`](skills/evidence-check/references/claims-format.md).
+Exit code 0 means every claim passed, 1 that at least one did not, 2 that the input could not be read. `--format json` gives the full report, `--lang zh` Chinese labels. Field reference and matching rules: [`references/claims-format.md`](https://github.com/llia0031-dotcom/evidence-check/blob/main/skills/evidence-check/references/claims-format.md).
 
 ## What it catches
 
@@ -156,7 +156,7 @@ All on fictional documents; the rounds with a model use Claude Haiku 5.5 and run
 - **v5, evcheck on whole drafts.** On four drafts in Markdown and Word, with Markdown, CSV and Excel sources, it flagged all 16 planted errors and none of 25 correct sentences. In 32 writing tasks, an assistant that could call it stated no number outside the sources, against 6 without it; none of those 6 was a wrong figure (list numbers, counts, correctly worked-out growth rates), so what it adds here is that every number can be traced. On the assistants' answers it also raised 10 false alarms on sentences that join facts from different source lines, the next thing to fix. All 32 conversations cost US$0.0092 through the Batch API.
 - **v6, evcheck 0.6.0.** Sentences that join several facts are searched part by part, and a month named in words picks its row. On 27 new cases fixed before the change, all 11 correct joined sentences pass and all 10 changed facts are still flagged; 2 of 3 wrong-month figures are flagged, against 0 before. On the 32 assistant answers of v5, false alarms fell from 10 to 2. An assistant using 0.6.0 kept more numbers (161 against 152) and still stated none outside the sources.
 
-Full report: [`eval/EVALUATION.md`](eval/EVALUATION.md). The test documents and drafts are synthetic and were written by the same author as the skill.
+Full report: [`eval/EVALUATION.md`](https://github.com/llia0031-dotcom/evidence-check/blob/main/eval/EVALUATION.md). The test documents and drafts are synthetic and were written by the same author as the skill.
 
 ## Develop
 
@@ -174,4 +174,4 @@ The model comparisons use [promptfoo](https://www.promptfoo.dev) and need Node.j
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE](https://github.com/llia0031-dotcom/evidence-check/blob/main/LICENSE).
