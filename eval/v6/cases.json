@@ -1,0 +1,156 @@
+{
+ "about": "v6 cases for evcheck, written on 2026-11-17 before evcheck 0.6.0 was written; every label was fixed when the case was written. kind: correct (true, joining facts from different source lines; should pass), error (one fact changed or invented; should be flagged), row (a figure from another month's row; should be flagged), limit (worked out from the sources; flagged on purpose), skip (no number and no quote).",
+ "sets": [
+  {
+   "id": "E",
+   "lang": "zh",
+   "draft": "sets/E/简报.md",
+   "sources": "sets/E/sources",
+   "sentences": [
+    {
+     "marker": "每次 90 分钟",
+     "kind": "correct",
+     "text": "报名时间为 2027 年 3 月 1 日至 3 月 15 日，每期共 6 次活动，每次 90 分钟。"
+    },
+    {
+     "marker": "每组 5 到 8 人",
+     "kind": "correct",
+     "text": "报名费 120 元，学生 60 元，每组 5 到 8 人。"
+    },
+    {
+     "marker": "候补 12 人",
+     "kind": "correct",
+     "text": "杭州报名 148 人，已分组 136 人，候补 12 人。"
+    },
+    {
+     "marker": "宁波报名 73 人",
+     "kind": "correct",
+     "text": "苏州报名 96 人，宁波报名 73 人。"
+    },
+    {
+     "marker": "读完比读快更重要",
+     "kind": "correct",
+     "text": "每位成员每期最多请假 2 次，负责人说：“读完比读快更重要。”"
+    },
+    {
+     "marker": "每次活动 120 分钟",
+     "kind": "error",
+     "text": "报名时间为 3 月 1 日至 3 月 15 日，每次活动 120 分钟。"
+    },
+    {
+     "marker": "学生 50 元",
+     "kind": "error",
+     "text": "报名费 120 元，学生 50 元。"
+    },
+    {
+     "marker": "已分组 163 人",
+     "kind": "error",
+     "text": "杭州报名 148 人，已分组 163 人。"
+    },
+    {
+     "marker": "宁波候补 3 人",
+     "kind": "error",
+     "text": "苏州候补 6 人，宁波候补 3 人。"
+    },
+    {
+     "marker": "5 到 10 人",
+     "kind": "error",
+     "text": "每组 5 到 10 人，每位成员每期最多请假 2 次。"
+    },
+    {
+     "marker": "读快比读完",
+     "kind": "error",
+     "text": "负责人说：“读快比读完更重要。”"
+    },
+    {
+     "marker": "共报名 317 人",
+     "kind": "limit",
+     "text": "三个城市共报名 317 人。"
+    },
+    {
+     "marker": "线上分享",
+     "kind": "skip",
+     "text": "读书会还会安排线上分享。"
+    }
+   ]
+  },
+  {
+   "id": "F",
+   "lang": "en",
+   "draft": "sets/F/summary.md",
+   "sources": "sets/F/sources",
+   "sentences": [
+    {
+     "marker": "Signups rose to 6,010",
+     "kind": "correct",
+     "text": "Signups rose to 6,010 in September, and paid conversions reached 467."
+    },
+    {
+     "marker": "fell to 3.8%",
+     "kind": "correct",
+     "text": "In August, signups were 5,480 and churn fell to 3.8%."
+    },
+    {
+     "marker": "$48 a year",
+     "kind": "correct",
+     "text": "The referral program launched on 4 August 2026, and annual plans followed on 15 September at $48 a year."
+    },
+    {
+     "marker": "within 24 hours",
+     "kind": "correct",
+     "text": "Support answers within 24 hours on weekdays, and the head of growth said: \"Referrals did more than any ad campaign this quarter.\""
+    },
+    {
+     "marker": "384 paid",
+     "kind": "correct",
+     "text": "July had 5,120 signups and 384 paid conversions."
+    },
+    {
+     "marker": "3.5% in September",
+     "kind": "correct",
+     "text": "Churn was 4.1% in July and 3.5% in September."
+    },
+    {
+     "marker": "5,480 in September",
+     "kind": "row",
+     "text": "Signups reached 5,480 in September."
+    },
+    {
+     "marker": "3.8% in July",
+     "kind": "row",
+     "text": "Churn was 3.8% in July."
+    },
+    {
+     "marker": "467 in August",
+     "kind": "row",
+     "text": "Paid conversions reached 467 in August."
+    },
+    {
+     "marker": "$58 a year",
+     "kind": "error",
+     "text": "Annual plans were introduced on 15 September at $58 a year."
+    },
+    {
+     "marker": "within 12 hours",
+     "kind": "error",
+     "text": "The referral program launched on 4 August 2026, and support answers within 12 hours."
+    },
+    {
+     "marker": "paid conversions 476",
+     "kind": "error",
+     "text": "In September, signups were 6,010 and paid conversions 476."
+    },
+    {
+     "marker": "every other channel",
+     "kind": "error",
+     "text": "The head of growth said: \"Referrals did more than every other channel.\""
+    },
+    {
+     "marker": "grew by 83",
+     "kind": "limit",
+     "text": "Paid conversions grew by 83 from July to September."
+    }
+   ]
+  }
+ ]
+}

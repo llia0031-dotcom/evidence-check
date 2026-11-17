@@ -44,7 +44,7 @@ Result, for the example in [`eval/v5/sets/D`](eval/v5/sets/D) (11 sentences chec
 - **Exit code** 1 when a sentence is not found, 0 when all are, 2 when a file cannot be read, so it can stop a script or a CI step. `--json -` prints the full result, `--problems-only` hides the sentences that were found, `--lang zh` gives Chinese labels.
 - **Without `[docs]`** it reads Markdown, text and CSV and needs nothing else (Python 3.9 or later): `pip install "evcheck @ git+https://github.com/llia0031-dotcom/evidence-check"`.
 - **`--llm`, optional:** for each sentence not found, Claude Haiku 5.5 points at the passage that states it, in any language, and the script checks that passage like any other: a sentence passes only on a real passage that holds its numbers. The token count and cost are shown before anything is sent (four sentences of a Chinese draft against English sources: US$0.0004). Needs `evcheck[llm]` and `ANTHROPIC_API_KEY`.
-- **How it works:** each sentence with a number, date, amount or quotation is matched to the closest lines of the sources by its words, then the Skill's script checks the quotes word for word and the numbers against those lines. It does not judge meaning, and a sentence without a number or quotation is not checked. Without `--llm`, the draft and the sources need to be in the same language.
+- **How it works:** each sentence with a number, date, amount or quotation is matched to the closest lines of the sources by its words, then the Skill's script checks the quotes word for word and the numbers against those lines. A sentence that joins several facts is also searched part by part, and a month named in words (September, 9 月) picks that month's row of a table. It does not judge meaning, and a sentence without a number or quotation is not checked. Without `--llm`, the draft and the sources need to be in the same language.
 
 ## Let an AI assistant check its own writing (MCP)
 
@@ -81,7 +81,7 @@ Any other agent that reads Agent Skills: copy `skills/evidence-check/` into its 
 
 The script needs Python 3.9 or later and nothing else.
 
-Version numbers: the agent's instructions (`SKILL.md`) are v0.2 and change only together with a new model evaluation; the script, evcheck and the plugin are 0.5.0. The two are numbered separately.
+Version numbers: the agent's instructions (`SKILL.md`) are v0.2 and change only together with a new model evaluation; the script and the plugin are 0.5.0; evcheck is 0.6.0. Each is numbered on its own.
 
 ### Run the script yourself
 
@@ -124,7 +124,7 @@ evcheck applies the script's rules, so its column is the script's, with one more
 | A value replaced by a later document, when the old one is still among the sources | | ✓ in the v2 cases | |
 | A number rounded to two significant digits or more (`0.31` for `0.314`): accepted and listed as rounded | ✓ | | |
 | Sums, conversions and coarser rounding (`约 4 万` for `43,000`), Roman numerals: flagged for you to check | | | ✓ |
-| evcheck only: a number from the wrong row of a table, when the sentence does not name the row ("Retention was 28.4% in October", when 0.284 is August's figure) | | | ✓ |
+| evcheck only: a figure from the wrong row of a table, when the sentence does not name the row or other words fit several rows (in v6, 2 of 3 wrong-month figures were flagged) | | | ✓ |
 
 ## Used by
 
@@ -154,6 +154,7 @@ All on fictional documents; the rounds with a model use Claude Haiku 5.5 and run
 - **Script 0.4.0.** Rounding to at least two significant digits is accepted and listed in the report; Chinese ordinals near the quote, quoted group names, `a third`, times with seconds and names like `SigLIP 2` no longer raise false alarms. On 28 new cases fixed before the change, correct claims passed went from 0 of 11 to 11 of 11, and all 13 changed numbers or names are still flagged.
 
 - **v5, evcheck on whole drafts.** On four drafts in Markdown and Word, with Markdown, CSV and Excel sources, it flagged all 16 planted errors and none of 25 correct sentences. In 32 writing tasks, an assistant that could call it stated no number outside the sources, against 6 without it; none of those 6 was a wrong figure (list numbers, counts, correctly worked-out growth rates), so what it adds here is that every number can be traced. On the assistants' answers it also raised 10 false alarms on sentences that join facts from different source lines, the next thing to fix. All 32 conversations cost US$0.0092 through the Batch API.
+- **v6, evcheck 0.6.0.** Sentences that join several facts are searched part by part, and a month named in words picks its row. On 27 new cases fixed before the change, all 11 correct joined sentences pass and all 10 changed facts are still flagged; 2 of 3 wrong-month figures are flagged, against 0 before. On the 32 assistant answers of v5, false alarms fell from 10 to 2. An assistant using 0.6.0 kept more numbers (161 against 152) and still stated none outside the sources.
 
 Full report: [`eval/EVALUATION.md`](eval/EVALUATION.md). The test documents and drafts are synthetic and were written by the same author as the skill.
 
@@ -166,6 +167,7 @@ python eval/v2/score.py --check             # validate the v2 cases
 python eval/v3/run.py                       # matching rules, script 0.2.0 against current
 python eval/v4/run.py                       # rounding and name rules, script 0.3.0 against current
 python eval/v5/run_cli.py                   # evcheck on the v5 drafts (Word and Excel need evcheck[docs])
+python eval/v6/run.py                       # evcheck 0.5.0 against the current version on the v6 cases
 ```
 
 The model comparisons use [promptfoo](https://www.promptfoo.dev) and need Node.js and an Anthropic API key in `eval/.env` (`ANTHROPIC_API_KEY=...`); the commands are at the top of each `promptfooconfig.yaml`. v5 part 2 runs with `python eval/v5/run_agents.py estimate | run | score` (needs `anthropic`).

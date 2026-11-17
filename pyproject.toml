@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "evcheck"
-version = "0.5.0"
+version = "0.6.0"
 description = "Check every number and quotation in a finished draft against your own files, offline, before you send it."
 readme = "README.md"
 license = "MIT"

@@ -46,6 +46,15 @@ def _write(text: str) -> None:
 
 
 def main(argv=None) -> int:
+    argv = sys.argv[1:] if argv is None else list(argv)
+    if argv[:1] == ["mcp"]:  # `evcheck mcp` starts the MCP server, the same as `evcheck-mcp`
+        try:
+            from .mcp_server import main as serve
+        except ImportError:
+            print('evcheck: the MCP server needs `pip install "evcheck[mcp]"` (Python 3.10 or later)', file=sys.stderr)
+            return 2
+        serve()
+        return 0
     args = build_parser().parse_args(argv)
     try:
         draft = read(args.draft)

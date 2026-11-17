@@ -3,7 +3,9 @@
 1. Split the draft into sentences and keep the ones that state a number or a quotation.
 2. For each one, find the source lines it shares the most words with (Chinese is compared by pairs of
    characters, other languages by words; numbers are left out of this step on purpose, so a changed number
-   cannot pull in a line that happens to contain it).
+   cannot pull in a line that happens to contain it, but a month counts as a word: September, Sep, 9 月 and
+   2026-09 are the same). A sentence that joins several facts is also searched part by part, so each fact
+   brings its own line.
 3. Hand the sentence and those lines to evidence-check's rules: every quotation must be word for word in a
    source, and every number in the sentence must be in its lines.
 """
@@ -27,15 +29,43 @@ MIN_SHARE = 0.2      # a line must share at least this part of a sentence's word
 NEAR_BEST = 0.6      # ... and be at least this close to the best line
 MAX_LINES = 3
 
+_MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+                "November", "December"]
+MONTHS = {name: i for i, name in enumerate(_MONTH_NAMES, 1)}
+MONTHS.update({name[:3]: i for i, name in enumerate(_MONTH_NAMES, 1)})
+MONTHS["Sept"] = 9
+# Capitalised only, so "may" and "march" as ordinary words are not read as months.
+MONTH_WORD_RE = re.compile(r"\b(" + "|".join(sorted(MONTHS, key=len, reverse=True)) + r")\b")
+MONTH_ZH_RE = re.compile(r"(?<!\d)(1[0-2]|0?[1-9])\s*月")
+MONTH_ISO_RE = re.compile(r"(?<!\d)(?:19|20)\d\d[-/.](1[0-2]|0?[1-9])(?!\d)")
+# Where a sentence that joins several facts is cut into parts: Chinese commas and semicolons, and a comma or
+# semicolon followed by a space (so 1,978 stays whole).
+PART_RE = re.compile(r"[，；]|[,;](?=\s)")
+
+
+def month_tokens(text: str) -> set:
+    """One word per month named in the text, the same for September, Sep, 9 月 and 2026-09."""
+    t = unicodedata.normalize("NFKC", text)
+    found = {MONTHS[m] for m in MONTH_WORD_RE.findall(t)}
+    found |= {int(m) for m in MONTH_ZH_RE.findall(t)} | {int(m) for m in MONTH_ISO_RE.findall(t)}
+    return {f"month:{m:02d}" for m in found}
+
 
 def tokens(text: str) -> set:
-    """Words cut to their first five letters (register, registration -> regis); Chinese as pairs of characters."""
+    """Words cut to their first five letters (register, registration -> regis); Chinese as pairs of characters;
+    one word for each month named."""
     t = unicodedata.normalize("NFKC", text).lower()
     words = {w.strip("'’-") for w in WORD_RE.findall(t)} - STOP - {""}
     out = {w[:5] for w in words}
     for run in CJK_RE.findall(t):
         out |= {run} if len(run) == 1 else {run[i:i + 2] for i in range(len(run) - 1)}
-    return out
+    return out | month_tokens(text)
+
+
+def parts(sentence: str) -> list:
+    """The parts of a sentence that joins several facts, or [] for a sentence with one part."""
+    pieces = [p.strip() for p in PART_RE.split(sentence) if p.strip()]
+    return pieces if len(pieces) > 1 else []
 
 
 def split_sentences(line: str) -> list:
@@ -43,8 +73,9 @@ def split_sentences(line: str) -> list:
     out, start, i, n = [], 0, 0, len(line)
     while i < n:
         ch = line[i]
-        # a full stop ends a sentence only before a space or the end of the line, so 4.2 and 1,234.5 stay whole
-        end = ch in SENT_END or (ch == "." and (i + 1 == n or line[i + 1].isspace()))
+        # a full stop ends a sentence only before a space, a closing quote or the end of the line, so 4.2 and
+        # 1,234.5 stay whole and `said: "Bring a laptop." Next` is two sentences
+        end = ch in SENT_END or (ch == "." and (i + 1 == n or line[i + 1].isspace() or line[i + 1] in CLOSERS))
         if end:
             j = i + 1
             while j < n and line[j] in CLOSERS:
@@ -145,8 +176,14 @@ def check_sentence(sentence: str, lib: Library) -> dict:
             evidence.append(Line(d, no, d.lines[no - 1]))
     numbers = ce.numbers_in(sentence)
     lines = lib.best_lines(sentence)
+    for part in parts(sentence):  # each fact of a joined sentence brings its own line
+        if ce.numbers_in(part):
+            lines += lib.best_lines(part)
     seen = {(e.doc.id, e.no) for e in evidence}
-    evidence += [ln for ln in lines if (ln.doc.id, ln.no) not in seen]
+    for ln in lines:
+        if (ln.doc.id, ln.no) not in seen:
+            seen.add((ln.doc.id, ln.no))
+            evidence.append(ln)
     if numbers:
         if not evidence:
             result["problems"].append({"kind": "no_source"})

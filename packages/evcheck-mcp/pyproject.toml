@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "evcheck-mcp"
+version = "0.6.0"
+description = "evcheck as an MCP server: check every number and quotation in a draft against your own files."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "Liang Liyuan" }]
+keywords = ["mcp", "fact-checking", "citations"]
+dependencies = ["evcheck[docs,mcp]==0.6.0"]
+
+[project.scripts]
+evcheck-mcp = "evcheck_mcp:main"
+
+[project.urls]
+Homepage = "https://github.com/llia0031-dotcom/evidence-check"
+Issues = "https://github.com/llia0031-dotcom/evidence-check/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["evcheck_mcp"]

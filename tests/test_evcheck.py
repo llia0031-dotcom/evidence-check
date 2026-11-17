@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from evcheck import cli  # noqa: E402
-from evcheck.check import check_draft, draft_sentences, split_sentences  # noqa: E402
+from evcheck.check import check_draft, draft_sentences, month_tokens, parts, split_sentences  # noqa: E402
 from evcheck.readers import ReadError, from_text, read, read_sources  # noqa: E402
 from evcheck.report import render_html, render_text  # noqa: E402
 
@@ -165,6 +165,38 @@ class SourcesAsText(Base):
         self.assertEqual(got["summary"]["flagged"], 1)
         self.assertTrue(mcp_server.find_quote("Each team has 2 to 4 members.", source_texts=texts)["found"])
         self.assertIn("error", mcp_server.check_draft(text=self.DRAFT))
+
+
+class JoinedSentencesAndMonths(Base):
+    """0.6.0: a sentence that joins facts from different lines, and a month named in words against a table."""
+
+    MONTHLY = "month,signups,churn_rate\n2026-08,5480,0.038\n2026-09,6010,0.035\n"
+
+    def test_month_written_four_ways_is_one_word(self):
+        want = {"month:09"}
+        for text in ("September", "Sep 2026", "9 月", "2026-09", "2026/09/14"):
+            self.assertEqual(month_tokens(text), want, text)
+        self.assertEqual(month_tokens("We may march on."), set())  # ordinary words, not months
+        self.assertEqual(month_tokens("2026-W46"), set())
+
+    def test_parts_of_a_joined_sentence(self):
+        self.assertEqual(parts("报名时间为 3 月 1 日，每次 90 分钟。"), ["报名时间为 3 月 1 日", "每次 90 分钟。"])
+        self.assertEqual(parts("Signups were 5,480, and churn fell."), ["Signups were 5,480", "and churn fell."])
+        self.assertEqual(parts("南京新街口店本周订单 1,978 单。"), [])
+        self.assertEqual(len(split_sentences('He said: "Bring a laptop." Teams have 2 to 4 members.')), 2)
+
+    def test_each_fact_of_a_joined_sentence_finds_its_line(self):
+        got = self.check("Registration closes on 7 March 2027 at 23:59 MYT, and the organiser said: \"Bring your own laptop.\" "
+                         "Registration closes on 7 March 2027 at 23:59 MYT, and each team has 2 to 4 members. "
+                         "Registration closes on 7 March 2027 at 23:59 MYT, and each team has 2 to 5 members.\n")
+        statuses = [s["status"] for s in got["sentences"]]
+        self.assertEqual(statuses, ["supported", "supported", "numbers_not_in_source"])
+
+    def test_a_named_month_picks_its_row(self):
+        (self.dir / "src" / "monthly.csv").write_text(self.MONTHLY, encoding="utf-8")
+        got = dict(self.status("Signups reached 6,010 in September. Signups reached 5,480 in September.\n"))
+        self.assertEqual(got["Signups reached 6,010 in September."], "supported")
+        self.assertEqual(got["Signups reached 5,480 in September."], "numbers_not_in_source")
 
 
 class ModelMode(Base):

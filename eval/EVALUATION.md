@@ -107,6 +107,31 @@ The 18 sentences evcheck flagged in the final answers (17 without the tool, 1 wi
 
 The assistant with the tool answered those false alarms by splitting or rewording the sentences, and in one answer, after five checks, by dropping a correct fact (the limit of two coupons a day). Picking source lines so that every number of a sentence is covered is the next change to make; it will be measured on new cases fixed in advance.
 
+## v6: evcheck 0.6.0, sentences that join facts, and months
+
+evcheck 0.6.0 changes only how source lines are picked; the script's rules are unchanged. A sentence is also searched part by part, split at commas and semicolons, and each part that states a number brings its own closest lines. When lines are picked, `September`, `Sep`, `9 月` and `2026-09` count as the same word, so a sentence that names a month prefers that month's row. Two new fictional sets (27 sentences), the expectations and the file hashes were fixed in [`v6/PREREGISTRATION.md`](v6/PREREGISTRATION.md) before the change ([`v6/results/script-only.md`](v6/results/script-only.md)):
+
+| 27 sentences, no model | Expected with 0.6.0 | 0.5.0 | 0.6.0 |
+|---|---|---|---|
+| Correct, facts from different lines in one sentence | pass | 10/11 passed | **11/11** passed |
+| One fact changed or invented | flagged | 10/10 | 10/10 |
+| A figure from another month's row | flagged | 0/3 | **2/3** |
+| Worked out from the sources | flagged | 2/2 | 2/2 |
+
+Two expectations were missed: 0.5.0 flagged only 1 of the 11 correct sentences (4 or more were expected), so these cases are easier than the assistants' answers of v5; and 0.6.0 let one wrong-month figure pass ("Paid conversions reached 467 in August", 467 being September's), because the month is one word of five and September's row shares the others. The v5 Part 1 results are unchanged (16/16 errors flagged, 0/25 false alarms).
+
+On the 32 final answers saved from v5 Part 2, which are not held out, the sentences flagged fell from 18 to 10 ([`v6/results/v5-answers.md`](v6/results/v5-answers.md)): the 8 numbers worked out by the writer are still flagged, and 2 false alarms remain out of 10, both `a three-step onboarding flow`, where one part still joins two facts with "and".
+
+**Run 4, the v5 tool arm again with 0.6.0 as the tool** ([`v6/results/tool-arm.md`](v6/results/tool-arm.md)): the same 8 tasks, model and prompts, 16 conversations through the Batch API, US$0.0061. The tasks are not new and the arm without the tool was not run again, so this is a re-run, not a held-out result.
+
+| 16 final answers per arm | v5, no tool | v5, evcheck 0.5.0 | v6, evcheck 0.6.0 |
+|---|---|---|---|
+| Numbers stated | 159 | 152 | **161** |
+| Numbers in no line of any source | 6 | 0 | 0 |
+| Flags the assistant saw while checking | — | 10 | 11 |
+
+The assistant with 0.6.0 kept more numbers (161, against 152 with 0.5.0 and 159 without the tool) and still stated none outside the sources. It did not see fewer flags, against the expectation: of its 11, 6 were numbers worked out by the writer (`三店`, `two main changes`), and 5 were false alarms of kinds v6 did not target: Chinese section numbers read as numbers (`二、补贴`), a number word with a hyphen read as 70 (`Seventy-one percent`), a sentence whose only word shared with the table was "retention", and one sentence-splitting error that was fixed while this run was going. Of v5's 10 flags, 6 had come from joined sentences and months, and none of that kind came back.
+
 ## Limits
 
 - The documents and drafts are synthetic and were written by the same author as the skill, with the labels fixed when the cases were written. Planted errors may be easier to spot than real ones.

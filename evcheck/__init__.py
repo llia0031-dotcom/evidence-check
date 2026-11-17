@@ -1,5 +1,5 @@
 """evcheck: check every number and quotation in a finished draft against your own sources."""
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 
 
 def check(draft_path, source_paths) -> dict:
