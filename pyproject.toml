@@ -32,8 +32,8 @@ evcheck = "evcheck.cli:main"
 evcheck-mcp = "evcheck.mcp_server:main"
 
 [project.urls]
-Homepage = "https://github.com/Jason-d-e/evidence-check"
-Issues = "https://github.com/Jason-d-e/evidence-check/issues"
+Homepage = "https://github.com/llia0031-dotcom/evidence-check"
+Issues = "https://github.com/llia0031-dotcom/evidence-check/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["evcheck"]

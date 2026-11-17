@@ -12,7 +12,7 @@
 安装（Python 3.10 或以上，用 [uv](https://docs.astral.sh/uv/)）：
 
 ```bash
-uv tool install "evcheck[docs] @ git+https://github.com/Jason-d-e/evidence-check"
+uv tool install "evcheck[docs] @ git+https://github.com/llia0031-dotcom/evidence-check"
 ```
 
 运行：
@@ -46,14 +46,14 @@ evcheck 周报.md --sources 原始数据/
 
 - **稿子**可以是 Markdown、纯文本、Word、PDF、网页；**资料**可以是这些格式的文件或文件夹，也可以是 CSV 和 Excel，表格每一行连同列名一起读。
 - **退出码**：有对不上的句子时是 1，全部找到是 0，文件读不了是 2，所以可以放进脚本或 CI 里拦住有问题的稿子。`--json -` 输出完整结果，`--problems-only` 只列有问题的句子，`--lang en` 换成英文标签（默认按稿子的语言）。
-- **不装 `[docs]`** 也能读 Markdown、纯文本和 CSV，不需要别的包（Python 3.9 或以上）：`pip install "evcheck @ git+https://github.com/Jason-d-e/evidence-check"`。
+- **不装 `[docs]`** 也能读 Markdown、纯文本和 CSV，不需要别的包（Python 3.9 或以上）：`pip install "evcheck @ git+https://github.com/llia0031-dotcom/evidence-check"`。
 - **`--llm`（可选）**：对没找到的句子，由 Claude Haiku 5.5 指出资料里说这件事的原文，不限语言；脚本再像核对其他原文一样核对它，所以只有资料里真有、而且含有句中数字的原文，才能让这句通过。发出请求前会先显示 token 数和费用（一篇 4 句的中文稿对英文资料，0.0004 美元）。需要装 `evcheck[llm]`，并设置 `ANTHROPIC_API_KEY`。
 - **原理**：带数字、日期、金额或引号的每一句，先按字词在资料里找最接近的几行，再由 Skill 的脚本逐字核对引文、逐个核对数字。它不判断意思，没有数字或引文的句子不核对。不加 `--llm` 时，稿子和资料要是同一种语言。
 
 ## 让 AI 助手自己查（MCP）
 
 ```bash
-claude mcp add evcheck -- uvx --from "evcheck[mcp] @ git+https://github.com/Jason-d-e/evidence-check" evcheck-mcp
+claude mcp add evcheck -- uvx --from "evcheck[mcp] @ git+https://github.com/llia0031-dotcom/evidence-check" evcheck-mcp
 ```
 
 助手会多出三个工具：`check_draft` 核对整篇稿子，`check_claim` 核对一句话和它所引的原文，`find_quote` 查一段话在资料里逐字出现在哪里（找不到就给最接近的几行）。资料在助手自己的沙箱里、不在运行这个服务的电脑上时，助手直接传资料原文，不传路径。任何 MCP 客户端都可以启动同一条命令；已经在 Claude Code 和 DeerFlow 里跑过。
@@ -77,7 +77,7 @@ claude mcp add evcheck -- uvx --from "evcheck[mcp] @ git+https://github.com/Jaso
 Claude Code，作为插件安装：
 
 ```
-/plugin marketplace add Jason-d-e/evidence-check
+/plugin marketplace add llia0031-dotcom/evidence-check
 /plugin install evidence-check@evidence-check
 ```
 
@@ -127,12 +127,12 @@ evcheck 用的就是脚本的规则，所以它和“脚本”一栏相同，另
 
 下面这些项目都出自同一作者，在自己的产出上运行这个脚本：
 
-- **[有据审核（广告审核 Agent）](https://github.com/Jason-d-e/grounded-review)。** 它的 `check_quotes` 工具把每一句广告原话和所引条款的原文交给脚本核对，不是逐字出现在广告或条款里的引文，在有人读到答案之前就会被拦下。
-- **[有据标注流水线](https://github.com/Jason-d-e/grounded-labelling-pipeline)。** 围绕有据审核搭的审核工作流：引文核对没过的判断进复核队列，政策库问答里的每一句引文也对照它所引的条款核对。
-- **[卖点体检](https://github.com/Jason-d-e/sellpoint-check)。** 从商品评价里摘出的每一句引文，都和它出自的那条评价逐字核对。
-- **[有据可查的简历初筛](https://github.com/Jason-d-e/evidence-screening)。** 用冻结的 0.2.0 脚本核对每个“符合要求”判断背后的引文，来源只有那份简历。
-- **[实时语音 Agent 体验评测](https://github.com/Jason-d-e/voice-agent-eval)。** 助手说出口的确认里的日期、时间和数字，对照工具调用记录核对，脚本原样使用。
-- **[有据经营分析](https://github.com/Jason-d-e/grounded-business-review)。** 周报里每一段写了数字的话，都要逐字引用查询结果里它出自的那几行，并通过这个脚本；没通过的周报不发出。
+- **[有据审核（广告审核 Agent）](https://github.com/llia0031-dotcom/grounded-review)。** 它的 `check_quotes` 工具把每一句广告原话和所引条款的原文交给脚本核对，不是逐字出现在广告或条款里的引文，在有人读到答案之前就会被拦下。
+- **[有据标注流水线](https://github.com/llia0031-dotcom/grounded-labelling-pipeline)。** 围绕有据审核搭的审核工作流：引文核对没过的判断进复核队列，政策库问答里的每一句引文也对照它所引的条款核对。
+- **[卖点体检](https://github.com/llia0031-dotcom/sellpoint-check)。** 从商品评价里摘出的每一句引文，都和它出自的那条评价逐字核对。
+- **[有据可查的简历初筛](https://github.com/llia0031-dotcom/evidence-screening)。** 用冻结的 0.2.0 脚本核对每个“符合要求”判断背后的引文，来源只有那份简历。
+- **[实时语音 Agent 体验评测](https://github.com/llia0031-dotcom/voice-agent-eval)。** 助手说出口的确认里的日期、时间和数字，对照工具调用记录核对，脚本原样使用。
+- **[有据经营分析](https://github.com/llia0031-dotcom/grounded-business-review)。** 周报里每一段写了数字的话，都要逐字引用查询结果里它出自的那几行，并通过这个脚本；没通过的周报不发出。
 
 ## 相关工具
 

@@ -12,7 +12,7 @@ Check that every number and quotation in a draft is really in your own files, be
 Install (Python 3.10 or later, with [uv](https://docs.astral.sh/uv/)):
 
 ```bash
-uv tool install "evcheck[docs] @ git+https://github.com/Jason-d-e/evidence-check"
+uv tool install "evcheck[docs] @ git+https://github.com/llia0031-dotcom/evidence-check"
 ```
 
 Run:
@@ -42,14 +42,14 @@ Result, for the example in [`eval/v5/sets/D`](eval/v5/sets/D) (11 sentences chec
 
 - **Drafts:** Markdown, text, Word, PDF, web pages. **Sources:** files or folders of the same, plus CSV and Excel; each table row is read with its column names.
 - **Exit code** 1 when a sentence is not found, 0 when all are, 2 when a file cannot be read, so it can stop a script or a CI step. `--json -` prints the full result, `--problems-only` hides the sentences that were found, `--lang zh` gives Chinese labels.
-- **Without `[docs]`** it reads Markdown, text and CSV and needs nothing else (Python 3.9 or later): `pip install "evcheck @ git+https://github.com/Jason-d-e/evidence-check"`.
+- **Without `[docs]`** it reads Markdown, text and CSV and needs nothing else (Python 3.9 or later): `pip install "evcheck @ git+https://github.com/llia0031-dotcom/evidence-check"`.
 - **`--llm`, optional:** for each sentence not found, Claude Haiku 5.5 points at the passage that states it, in any language, and the script checks that passage like any other: a sentence passes only on a real passage that holds its numbers. The token count and cost are shown before anything is sent (four sentences of a Chinese draft against English sources: US$0.0004). Needs `evcheck[llm]` and `ANTHROPIC_API_KEY`.
 - **How it works:** each sentence with a number, date, amount or quotation is matched to the closest lines of the sources by its words, then the Skill's script checks the quotes word for word and the numbers against those lines. It does not judge meaning, and a sentence without a number or quotation is not checked. Without `--llm`, the draft and the sources need to be in the same language.
 
 ## Let an AI assistant check its own writing (MCP)
 
 ```bash
-claude mcp add evcheck -- uvx --from "evcheck[mcp] @ git+https://github.com/Jason-d-e/evidence-check" evcheck-mcp
+claude mcp add evcheck -- uvx --from "evcheck[mcp] @ git+https://github.com/llia0031-dotcom/evidence-check" evcheck-mcp
 ```
 
 The assistant gets three tools: `check_draft` for a whole draft, `check_claim` for one sentence and the quotes chosen for it, and `find_quote` for where a passage appears word for word (or the closest lines). When the files are in the assistant's own sandbox rather than on the machine running the server, it passes their text instead of their paths. Any MCP client can start the same command; it has been run in Claude Code and in DeerFlow.
@@ -73,7 +73,7 @@ The script cannot judge meaning: a real sentence can be cited for its opposite. 
 Claude Code, as a plugin:
 
 ```
-/plugin marketplace add Jason-d-e/evidence-check
+/plugin marketplace add llia0031-dotcom/evidence-check
 /plugin install evidence-check@evidence-check
 ```
 
@@ -130,12 +130,12 @@ evcheck applies the script's rules, so its column is the script's, with one more
 
 These projects, all by the same author, run the script on their own output:
 
-- **[Grounded Review (ad-review agent)](https://github.com/Jason-d-e/grounded-review).** Its `check_quotes` tool runs the script on every quote from the ad and from the cited clause, so a quote that is not word for word in either is caught before anyone reads the answer.
-- **[Grounded Labelling Pipeline](https://github.com/Jason-d-e/grounded-labelling-pipeline).** The review workflow built around Grounded Review: a decision whose quotes fail the check goes to the review queue, and every quote in its policy-library answers is checked against the clause it cites.
-- **[Sellpoint Check](https://github.com/Jason-d-e/sellpoint-check).** Every quote it takes from product reviews is checked word for word against the review it came from.
-- **[Evidence-backed resume screening](https://github.com/Jason-d-e/evidence-screening).** A frozen copy of script 0.2.0 checks the quotes behind each "meets the requirement" verdict, with the resume as the only source.
-- **[Real-time voice agent evaluation](https://github.com/Jason-d-e/voice-agent-eval).** The dates, times and numbers in the agent's spoken confirmations are checked against the record of tool calls, with the script unchanged.
-- **[Grounded Business Review](https://github.com/Jason-d-e/grounded-business-review).** Every passage of a weekly review that states a number must quote the rows of the query results it comes from and pass the script; a review that fails is not released.
+- **[Grounded Review (ad-review agent)](https://github.com/llia0031-dotcom/grounded-review).** Its `check_quotes` tool runs the script on every quote from the ad and from the cited clause, so a quote that is not word for word in either is caught before anyone reads the answer.
+- **[Grounded Labelling Pipeline](https://github.com/llia0031-dotcom/grounded-labelling-pipeline).** The review workflow built around Grounded Review: a decision whose quotes fail the check goes to the review queue, and every quote in its policy-library answers is checked against the clause it cites.
+- **[Sellpoint Check](https://github.com/llia0031-dotcom/sellpoint-check).** Every quote it takes from product reviews is checked word for word against the review it came from.
+- **[Evidence-backed resume screening](https://github.com/llia0031-dotcom/evidence-screening).** A frozen copy of script 0.2.0 checks the quotes behind each "meets the requirement" verdict, with the resume as the only source.
+- **[Real-time voice agent evaluation](https://github.com/llia0031-dotcom/voice-agent-eval).** The dates, times and numbers in the agent's spoken confirmations are checked against the record of tool calls, with the script unchanged.
+- **[Grounded Business Review](https://github.com/llia0031-dotcom/grounded-business-review).** Every passage of a weekly review that states a number must quote the rows of the query results it comes from and pass the script; a review that fails is not released.
 
 ## Related tools
 
