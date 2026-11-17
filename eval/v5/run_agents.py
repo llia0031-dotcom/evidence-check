@@ -35,7 +35,7 @@ MAX_TOKENS = 8000
 RUNS = 2
 MAX_ROUNDS = 6
 PRICE_IN, PRICE_OUT, BATCH = 0.10, 0.50, 0.5  # US$ per million tokens; batches cost half
-STOP_AT = 0.50  # US$: stop and ask the owner first
+STOP_AT = 0.50  # US$: the cost limit fixed in PREREGISTRATION.md
 OUT = V5 / "results" / "agents"
 STATE = OUT / "state.json"
 
@@ -118,7 +118,7 @@ def run_tool(set_id, text) -> str:
 
 def client():
     import anthropic
-    # Claude Code's own ANTHROPIC_* / CLAUDE_* variables must not reach the SDK.
+    # Environment variables set by other tools must not override the key read from the .env file.
     for name in [k for k in os.environ if k.upper().startswith(("ANTHROPIC_", "CLAUDE_"))]:
         del os.environ[name]
     env_file = (ROOT / "eval" / os.environ.get("EVAL_ENV_FILE", ".env")).resolve()
@@ -179,7 +179,7 @@ def run():
         if not todo:
             break
         if state["spent"] > STOP_AT:
-            print(f"STOPPED: spent US${state['spent']:.4f}, over US${STOP_AT}; ask the owner before going on")
+            print(f"STOPPED: spent US${state['spent']:.4f}, over the US${STOP_AT} limit in PREREGISTRATION.md")
             return 1
         batch = c.messages.batches.create(requests=[
             Request(custom_id=conv["id"], params=MessageCreateParamsNonStreaming(**conv["params"])) for conv in todo])

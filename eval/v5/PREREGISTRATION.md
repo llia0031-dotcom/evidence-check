@@ -74,5 +74,5 @@ Written after Part 1 had run and before any Part 2 request was sent. `run_agents
 ## Changes after the run
 
 - Part 1: none. Re-run after the report wording changed (17 Nov 2026), the results are the same.
-- Part 2 ran on 17 Nov 2026 between 07:06 and 07:20 MYT, 6 batches, US$0.0092. After the run, `run_agents.py` changed only in what `score` writes: the result files are named `tool-use.md` and `tool-use.json`, and batch IDs are left out of them. The answers, the run and the measure did not change.
+- Part 2 ran on 17 Nov 2026 between 07:06 and 07:20 MYT, 6 batches, US$0.0092. After the run, `run_agents.py` changed only in what `score` writes: the result files are named `tool-use.md` and `tool-use.json`, and batch IDs are left out of them. Later the same day two comments and the message printed at the cost limit were reworded. The answers, the run and the measure did not change; `run_agents.py` is now `d9c52c2ee703`.
 - The measure was applied as fixed. The six numbers it counts in the arm without the tool were then read one by one, and the report says what each one is (list numbers, counts, worked-out growth rates; none a wrong figure). The sentences evcheck flags in the final answers were read the same way.
